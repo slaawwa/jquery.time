@@ -15,7 +15,6 @@ My first jquery plugin - jquery.time.js
 ```html
 	<i id="#needTime"></i>
 	<script>
-		var timeStamp = new Date().getTime();
 		$('#needTime').time();
 	</script>
 ```
