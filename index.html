@@ -34,7 +34,7 @@
 		<li><span class="needTime" data-time="1319058000000"></span></li>
 		<li><span class="needTime" data-time="1508446800000"></span></li>
 		<li><span class="needTime" data-time="1316466000000"></span></li>
-		<li><span class="needTime" data-time="1474318800000"></span></li>
+		<li><span class="needTime" data-time="1466607950636"></span></li>
 	</ul>
 		
 	<hr>
@@ -59,6 +59,14 @@
 					$('ul').empty();
 				},
 				init: function() {
+					$('#oneMin').click(function() {time.add1()});
+					$('#clear').click(function() {time.clear()});
+
+					$('#tStampBtn').click(function() {
+						time._add($('#timeStamp').val());	
+					});
+					$('#timeStamp').val(new Date().getTime());
+					
 					$('#oneData').click(function() {
 						$('.needTime').time({
 							// time: new Date().getTime(),
@@ -67,13 +75,6 @@
 							// pastLabel: '',
 						}).removeClass('needTime');
 					});
-					$('#oneMin').click(function() {time.add1()});
-					$('#clear').click(function() {time.clear()});
-
-					$('#tStampBtn').click(function() {
-						time._add($('#timeStamp').val());	
-					});
-					$('#timeStamp').val(new Date().getTime());
 				}
 			};
 

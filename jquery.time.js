@@ -70,7 +70,7 @@ $(function() {
 					ret = 'In ' + ret + ' sec';
 				}
 				if (cnf.withAt) {
-					ret = ret + ' at ' + _helper.time.t2date(timeObj, cnf);
+					ret = ret + ' at ' + _helper.time.t2amORpm(timeObj);
 				}
 				timeObj.text = ret;
 				return ret;
@@ -83,7 +83,7 @@ $(function() {
 					ret = 'In ' + ret + ' min';
 				}
 				if (cnf.withAt) {
-					ret = ret + ' at ' + _helper.time.t2date(timeObj, cnf);
+					ret = ret + ' at ' + _helper.time.t2amORpm(timeObj);
 				}
 				timeObj.text = ret;
 				return ret;
@@ -97,7 +97,7 @@ $(function() {
 					ret = 'In ' + ret + hourText;
 				}
 				if (cnf.withAt) {
-					ret = ret + ' at ' + _helper.time.t2date(timeObj, cnf);
+					ret = ret + ' at ' + _helper.time.t2amORpm(timeObj);
 				}
 				timeObj.text = ret;
 				return ret;
@@ -111,7 +111,7 @@ $(function() {
 				}
 				timeObj.val = ret;
 				if (cnf.withAt) {
-					ret = ret + ' at ' + _helper.time.t2date(timeObj, cnf);
+					ret = ret + ' at ' + _helper.time.t2amORpm(timeObj);
 				}
 				timeObj.text = ret;
 				return ret;
@@ -133,6 +133,22 @@ $(function() {
 					ret = month + ' ' + day + year;
 				if (!timeObj.val) {
 					timeObj.val = timeObj.text = ret;
+				}
+				return ret;
+			},
+			num2: function(num) {
+				return num> 9? num: '0'+num;
+			},
+			num1: function(num) {
+				return num> 12? num - 12: num;
+			},
+			t2amORpm: function(timeObj) {
+				var ret = _helper.time.num1(timeObj.date.getHours()) + ':'
+					    + _helper.time.num2(timeObj.date.getMinutes());
+				if (timeObj.date.getHours() > 11) {
+					ret = ret + 'pm';
+				} else {
+					ret = ret + 'am';
 				}
 				return ret;
 			},
@@ -227,13 +243,11 @@ $(function() {
 			return this;
 		},
 		init: function( opts ) {
-			if (opts === undefined) {
-			}
 			return this.each(function() {
 				var data = {}
 				if ($(this).data('time')) data.time = $(this).data('time');
 				var cnf = _helper.setting(opts, data);
-				var $this = $(this), extDate = _helper.extend(data.time);
+				var $this = $(this), extDate = _helper.extend(cnf.time);
 				if (opt.debug) {
 					var json = 'extDate: ' + (JSON.stringify(extDate)
 						.replace(/\,\"/igm, '\,\n\t\<b\>\"')
