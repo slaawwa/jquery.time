@@ -1,5 +1,23 @@
 # jquery.time
-My first jquery plugin - jquery.time.js
+
+>My first jquery plugin - ***jquery.time.js***
+
+> It's plugin for sweety transform and ***`auto refresh`*** time/date`(timeStamp)`
+
+# So, result look like this:
+
+ * 2 min ago
+ * In 29 sec at 3:55am
+ * In 29 sec
+ * 2 hours ago at 4:18pm
+ * Tomorow at 3:59pm
+ * Tomorow at 4:02pm
+ * Tomorow at 2:03pm
+ * In 5 days at June 17th
+ * October 20th 2011
+ * October 20th 2017
+ * September 20th 2011
+ * 32 min ago at 6:05pm
 
 ## Attr `data-time`:
 
@@ -55,4 +73,4 @@ My first jquery plugin - jquery.time.js
 ```
 
 ### Version
-1.0.1
+1.0.2
