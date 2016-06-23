@@ -107,9 +107,9 @@ $(function() {
 			t2tomorrowORyesterday: function(timeObj, cnf) {
 				var ret;
 				if (timeObj.past) {
-					ret = 'Tomorow';
+					ret = 'Yesterday';
 				} else {
-					'Yestarday'
+					ret = 'Tomorrow';
 				}
 				timeObj.val = ret;
 				if (cnf.withAt) {
@@ -185,7 +185,7 @@ $(function() {
             } else if (intTime < 86400000 /* opt.level2time[3] */) { // 24 * 60 * 60 * 1000
                 resTime.level = 2;
 
-            // Tomorow/Yestarday
+            // Tomorow/Yesterday
             } else if (intTime < 172800000 /* opt.level2time[4] */) { // 2 * 86400000
                 resTime.level = 3;
 
