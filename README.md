@@ -76,5 +76,33 @@
 +=============+======================+====================================+
 ```
 
+## Sync with server time
+
+### Set server time
+
+```html
+	<script>
+		$(document).time('setServerTime', serverTimeStamp);
+
+		// If server return time without milisecond
+		$(document).time('setServerTime', serverTimeStamp, true);
+		// It`s some if you do serverTimeStamp
+		serverTimeStamp *= 1000;
+		$(document).time('setServerTime', serverTimeStamp);
+	</script>
+```
+### Get server time
+
+```html
+	<script>
+		// return timeStamp
+		var serverTimeStamp = $(document).time('getServerTime');
+		alert('Server Time Stamp: ' + serverTimeStamp);
+
+		// Or get only difference local and server time
+		var timeDefStamp = $(document).time('getServerTime', true);
+		alert('Defference time: ' + timeDefStamp + 'ms');
+	</script>
+```
 ### Version
-1.0.3
+1.0.4
