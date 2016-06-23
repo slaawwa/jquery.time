@@ -7,6 +7,9 @@ $(function() {
 	var now = new Date(), 
 		dayInTime = 24 * 60 * 60 * 1000, 
 		opt = {
+			debug: false,
+			now: now.getTime(),
+			nowYear: now.getFullYear(),
 			setVal: function(key, val) {
 				opt[key] = val;
 			},
@@ -15,9 +18,6 @@ $(function() {
 				opt.now = t.getTime();
 				opt.nowYear = t.getFullYear();
 			},
-			debug: true,
-			now: now.getTime(),
-			nowYear: now.getFullYear(),
 			level2fn: [
 				't2sec', // 0
 				't2min', // 1
