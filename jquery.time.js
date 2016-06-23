@@ -15,7 +15,7 @@ $(function() {
 				opt.now = t.getTime();
 				opt.nowYear = t.getFullYear();
 			},
-			debug: false,
+			debug: true,
 			now: now.getTime(),
 			nowYear: now.getFullYear(),
 			level2fn: [
@@ -56,10 +56,12 @@ $(function() {
 		toStr: function(timeObj, cnf) {
 			if (!cnf.showPast && timeObj.past) {
 				return cnf.pastLabel;
-			} else {
-				var fn = opt.level2fn[timeObj.level];
-				return _helper.time[fn](timeObj, cnf); 
 			}
+			if (!cnf.showFuture && !timeObj.past) {
+				return cnf.futureLabel;
+			}
+			var fn = opt.level2fn[timeObj.level];
+			return _helper.time[fn](timeObj, cnf); 
 		},
 		time: {
 			t2sec: function(timeObj, cnf) {
@@ -117,8 +119,13 @@ $(function() {
 				return ret;
 			},
 			t2days: function(timeObj, cnf) {
-				var days = parseInt(timeObj.defTime / 86400000 /* opt.level2time[3] */),
-				ret = 'In ' + days + ' days';
+				var days = parseInt(timeObj.defTime / 86400000 /* opt.level2time[3] */), 
+					ret;
+				if (timeObj.past) {
+					ret = days + ' days ago';
+				} else {
+					ret = 'In ' + days + ' days';
+				}
 				timeObj.val = days;
 				if (cnf.withAt) {
 					ret = ret + ' at ' + _helper.time.t2date(timeObj, cnf);
@@ -221,6 +228,8 @@ $(function() {
 		      	withAt: false,
 		      	time: new Date().getTime(),
 		      	showPast: true,
+		      	showFuture: true,
+		      	futureLabel: '',
 		      	pastLabel: '',
 		    }, data);
 			return $.extend(ar, opts);
