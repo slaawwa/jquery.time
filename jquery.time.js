@@ -256,6 +256,7 @@ $(function() {
 				var data = {}
 				if ($(this).data('time')) data.time = $(this).data('time');
 				var cnf = _helper.setting(opts, data);
+				cnf.time = parseInt( cnf.time );
 				var $this = $(this), extDate = _helper.extend(cnf.time);
 				if (opt.debug) {
 					var json = 'extDate: ' + (JSON.stringify(extDate)
