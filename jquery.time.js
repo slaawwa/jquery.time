@@ -294,6 +294,10 @@ $(function() {
         setServerTime: function(serverTimeStamp, timeStampWithoutMilisecond) {
             if (timeStampWithoutMilisecond) serverTimeStamp = serverTimeStamp * 1000;
             var defTime = new Date(serverTimeStamp).getTime() - new Date().getTime();
+            return methods.serverDefTime(defTime);
+        },
+        serverDefTime: function(defTime) {
+            if (defTime === undefined) return methods.get('serverDefTime'); 
             opt.setVal('serverDefTime', defTime);
             opt.refresh();
             return defTime;
@@ -329,7 +333,7 @@ $(function() {
         } else if ( typeof method === 'object' || ! method ) {
             return methods.init.apply( this, arguments );
         } else {
-            $.error( 'Метод (' +  method + ') відсутній в jQuery.time' );
+            $.error( 'Method (' +  method + ') not found in jQuery.time' );
         }
     }
 });

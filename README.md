@@ -22,39 +22,39 @@
 ## Attr `data-time`:
 
 ```html
-	<i id="#needTime" data-time="1466601527165"></i>
-	<script>
-		$('#needTime').time();
-	</script>
+    <i id="#needTime" data-time="1466601527165"></i>
+    <script>
+        $('#needTime').time();
+    </script>
 ```
 
 ## Script variant 1 without params:
 
 ```html
-	<i id="#needTime"></i>
-	<script>
-		$('#needTime').time();
-	</script>
+    <i id="#needTime"></i>
+    <script>
+        $('#needTime').time();
+    </script>
 ```
 
 ## Script variant 2 with param:
 
 ```html
-	<i id="#needTime"></i>
-	<script>
-		var timeStamp = new Date().getTime();
-		$('#needTime').time({time: timeStamp});
-	</script>
+    <i id="#needTime"></i>
+    <script>
+        var timeStamp = new Date().getTime();
+        $('#needTime').time({time: timeStamp});
+    </script>
 ```
 
 ## Script variant 3 with param:
 
 ```html
-	<i id="#needTime"></i>
-	<script>
-		var timeStamp = new Date().getTime();
-		$('#needTime').data('time', timeStamp).time();
-	</script>
+    <i id="#needTime"></i>
+    <script>
+        var timeStamp = new Date().getTime();
+        $('#needTime').data('time', timeStamp).time();
+    </script>
 ```
 
 ## Params
@@ -78,31 +78,67 @@
 
 ## Sync with server time
 
+### Set server defference time and local time
+
+```html
+    <script>
+        $(document).time('serverDefTime', serverLocalDefTime);
+    </script>
+    <!-- 
+
+        Full example can look like this  
+
+    -->
+    <script>
+        var syncServerTime = function(fn) {
+            var startTime = new Date().getTime();
+            $.getJSON('/api/server_utc', function(response) {
+                var finishTime = new Date().getTime(),
+                    defTime = 0.5 * (finishTime - startTime);
+                fn(defTime, response.utc_time - defTime);
+            });
+        };
+
+        syncServerTime(function(defTime) {
+            $(document).time('serverDefTime', serverLocalDefTime);
+        });
+    </script>
+```
+
+
+### Get server defference time
+
+```html
+    <script>
+        $(document).time('serverDefTime');
+    </script>
+```
+
 ### Set server time
 
 ```html
-	<script>
-		$(document).time('setServerTime', serverTimeStamp);
+    <script>
+        $(document).time('setServerTime', serverTimeStamp);
 
-		// If server return time without milisecond
-		$(document).time('setServerTime', serverTimeStamp, true);
-		// It`s some if you do serverTimeStamp
-		serverTimeStamp *= 1000;
-		$(document).time('setServerTime', serverTimeStamp);
-	</script>
+        // If server return time without milisecond
+        $(document).time('setServerTime', serverTimeStamp, true);
+        // It`s some if you do serverTimeStamp
+        serverTimeStamp *= 1000;
+        $(document).time('setServerTime', serverTimeStamp);
+    </script>
 ```
 ### Get server time
 
 ```html
-	<script>
-		// return timeStamp
-		var serverTimeStamp = $(document).time('getServerTime');
-		alert('Server Time Stamp: ' + serverTimeStamp);
+    <script>
+        // return timeStamp
+        var serverTimeStamp = $(document).time('getServerTime');
+        alert('Server Time Stamp: ' + serverTimeStamp);
 
-		// Or get only difference local and server time
-		var timeDefStamp = $(document).time('getServerTime', true);
-		alert('Defference time: ' + timeDefStamp + 'ms');
-	</script>
+        // Or get only difference local and server time
+        var timeDefStamp = $(document).time('getServerTime', true);
+        alert('Defference time: ' + timeDefStamp + 'ms');
+    </script>
 ```
 ### Version
 1.0.4
