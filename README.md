@@ -99,7 +99,7 @@
             });
         };
 
-        syncServerTime(function(defTime) {
+        syncServerTime(function(serverLocalDefTime) {
             $(document).time('serverDefTime', serverLocalDefTime);
         });
     </script>
